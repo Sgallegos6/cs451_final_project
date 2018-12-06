@@ -16,10 +16,10 @@
     id: 'mapbox.streets'
 }).addTo(mymap);
 
-"{% for job in close_jobs %}"
-    var marker = L.marker(["{{ job.lat }}","{{ job.lon }}"]).addTo(mymap);
+{% for job in close_jobs %}
+    var marker = L.marker([{{ job.lat }},{{ job.lon }}]).addTo(mymap);
     marker.bindPopup("{{ job.title }}");
-"{% endfor %}"
+{% endfor %}
 
 var circle = L.circle([35.593553, -105.221299], {
     color: 'red',
