@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content_body %}
+<div class="row">
+
+	<div class="col-md-3">
+		<p>Title: {{ object.title }}</p>
+		<p>Salary: ${{ object.salary }}</p>
+	</div>
+
+	<div class="col-md-9">
+		<p>Address: {{ object.address }}</p>
+		<p>Location: {{ object.lat }}, {{ object.lon }}</p>
+	</div>
+</div>
+{% endblock content_body %}

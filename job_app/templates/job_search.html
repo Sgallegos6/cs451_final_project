@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content_body %}
+    <h1>Jobs within 100 miles</h1>
+    <ul>
+    	{% for job in close_jobs %} 
+    		<li> 
+                <a href= "{% url 'job' job.pk %}"> {{ job.title }} </a>
+            </li>
+    	{% endfor %}
+        <div id="mapid" style="height: 600px; width: 800px;"></div>
+        <script>var mymap = L.map('mapid').setView([35.593553, -105.221299], 8);
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets'
+}).addTo(mymap);
+
+"{% for job in close_jobs %}"
+    var marker = L.marker(["{{ job.lat }}","{{ job.lon }}"]).addTo(mymap);
+    marker.bindPopup("{{ job.title }}");
+"{% endfor %}"
+
+var circle = L.circle([35.593553, -105.221299], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 160934
+}).addTo(mymap);
+
+var marker = L.marker([35.593553, -105.221299]).addTo(mymap);
+    marker.bindPopup("Highlands").openPopup();
+
+</script>
+    </ul>
+{% endblock content_body %}

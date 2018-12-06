@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content_body %}
+    <h1>Jobs</h1>
+    <ul>
+    	{% for job in object_list %} 
+    		<li> 
+                <a href= "{% url 'job' job.pk %}"> {{ job.title }} </a>
+            </li>
+    	{% endfor %}
+    </ul>
+{% endblock content_body %}
